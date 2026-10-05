@@ -6,12 +6,14 @@ import TopNews from "./components/TopNews";
 import Bitcoin from "./components/Bitcoin";
 import Ethereum from "./components/Ethereum";
 import Footer from "./components/Footer";
+import SearchModal from "./components/SearchModal";
 
 const API_URL = "https://cryptocurrency-news2.p.rapidapi.com/v1/coindesk";
 
 function App() {
   const [dark, setDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -49,8 +51,9 @@ function App() {
           : "min-h-screen bg-[#F5F7F6] text-[#111615]"
       }
     >
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} articles={news} />
       <Navbar  dark={dark}  setDark={setDark} menuOpen={menuOpen}
-       setMenuOpen={setMenuOpen}
+      setSearchOpen={setSearchOpen} setMenuOpen={setMenuOpen}
       />
 
       <main className="mx-auto w-full max-w-[1500px] px-4 sm:px-6 lg:px-8">
@@ -69,7 +72,8 @@ function App() {
         </div>
       </main>
 
-      <Footer dark={dark} />
+      <Footer />
+      
     </div>
   );
 }
